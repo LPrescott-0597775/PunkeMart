@@ -1,0 +1,23 @@
+/*css styles related to the shop and cart*/
+.product-grid {
+    display: grid;
+    grid-template-columns: 100% 100%;
+    gap: 2em;
+    margin: 25px 0 40px;
+}
+.product-card {
+    background-color: #369696;
+    border-radius: 12px;
+    padding: .75em;
+    filter: drop-shadow(.25em .25em .1em)
+}
+.product-card p {
+    margin: 8px 0;
+}
+#shopImg {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+}

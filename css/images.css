@@ -1,0 +1,11 @@
+/*css related to images*/
+
+/*index*/
+.homeImage {
+	width:30em; /*change width and height when image is finalized, keep similar in size to this*/
+	height:20em;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 2em;
+}
