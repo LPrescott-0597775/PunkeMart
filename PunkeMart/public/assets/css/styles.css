@@ -1,0 +1,67 @@
+/*Overarching colors and fonts for thw whole website*/
+header {
+    background-color: cornflowerblue;
+    display: flex;
+    align-items: center;
+}
+body{
+	background-color: cornsilk;
+}
+#wrapper{
+	background-color: white;
+}
+.textContainer{
+	background-color: cornflowerblue;
+	border-radius: .9em;
+	padding: .5em;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*Cart icon*/
+.cartButton{
+	margin-left: auto;
+	margin-right: 3em;
+}
+.cartButton a {
+	color: black;
+}
+
+/*Hamburger menu*/
+nav {
+    position: relative;
+    padding: 1.5rem 2rem;
+    background-color: cornflowerblue;
+    color: black;
+}
+.checkbtn {
+    font-size: 1.5rem;
+    color: black;
+    cursor: pointer;
+}
+#check {
+    display: none;
+}
+#check:checked ~ .nav-mobile {
+    display: block;
+}
+.nav-mobile {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: cornflowerblue;
+    z-index: 1;
+    width: 200px;
+}
+.nav-mobile a {
+    color: black;
+    padding: 1rem 1.5rem;
+    display: block;
+}
+hr {
+  background-color: cornflowerblue;
+  padding: 1px;
+  border: none;
+}
