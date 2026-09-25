@@ -41,26 +41,36 @@
 	</div>
 	<!-- this will be replaced with a filter system later on -->
 	<h2>Gear</h2>
-		<section id="product-list" class = "product-grid">
+		<section id="gear-list" class = "product-grid">
 			<div class="product-card">
-				<img id="shopImg" src="../assets/images/shop_PLACEHOLDER.png"></img>
+				<img class="shopImg" src="../assets/images/shop_PLACEHOLDER.png"></img>
 				<label for="shirts">PLACEHOLDER A - $XX.XX each</label>
 				<label for="shirtsQty"></label><input class = "number" type="number" min="1" value="1" id="qty-1">
-				<button class="action-button primary-button" onclick="addToCart('PLACEHOLDER A', 00.00, 1)">Add to Cart</button>
+				<button class="action-button primary-button" onclick="addToCart('001', 'PLACEHOLDER A', 10.00, document.getElementById('qty-1').value)">Add to Cart</button>
 			</div>
 		</section>
 	<h2>Apparel</h2>
-		<section id="product-list" class = "product-grid">
+		<section id="apparel-list" class = "product-grid">
 			<div class="product-card">
-				<img id="shopImg" src="../assets/images/shop_PLACEHOLDER.png"></img>
+				<img class="shopImg" src="../assets/images/shop_PLACEHOLDER.png"></img>
 				<label for="shirts">PLACEHOLDER APPAREL A - $XX.XX each</label><select id="size-1">
-                                                             <option value="sm">Small</option>
-															 <option value="md">Medium</option>
-															 <option value="lg">Large</option>
-															 <option value="xl">X-Large</option>
-															 </select>
-				<label for="shirtsQty"></label><input class = "number" type="number" min="1" value="1" id="qty-1">
-				<button class="action-button primary-button" onclick="addToCart('PLACEHOLDER APPAREL A', 00.00, 1)">Add to Cart</button>
+    																<option value="Small">Small</option>
+    																<option value="Medium">Medium</option>
+    																<option value="Large">Large</option>
+    																<option value="X-Large">X-Large</option>
+																				</select>
+				<label for="shirtsQty"></label>
+				<input
+    				class="number"
+    				type="number"
+    				min="1"
+    				value="1"
+    				id="qty-2"
+				>
+				<button class="action-button primary-button" onclick="addToCart('002','PLACEHOLDER APPAREL A',25.00,
+        			document.getElementById('qty-2').value,
+        			document.getElementById('size-1').value)">Add to Cart
+				</button>
 			</div>
 		</section>
 </main>
@@ -74,6 +84,7 @@
 </footer>
 
 </div>
+<script src="../assets/scripts/cart.js"></script>
 </body>
 
 </html>
