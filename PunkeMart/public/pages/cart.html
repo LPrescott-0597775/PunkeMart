@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>PunkeMart </title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="scripts/jquery-3.7.1.min.js"></script>
-	<link rel="stylesheet" href="../assets/css/styles.css" />
-	<link rel="stylesheet" href="../assets/css/images.css" />
-	<link rel="stylesheet" href="../assets/css/shop.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/shop.css">
 </head>
 
 <body>
-<div id="wrapper">
-<header>
+    <div id="wrapper">
+    <header>
 
-    <nav>
-        <input title="check" type="checkbox" id="check">
+        <nav>
+            <input title="check" type="checkbox" id="check">
 
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
 
-        <div class="nav-mobile">
-            <a href="../index.html">Home</a>
-            <a href="shop.html">Shop</a>
-			<a href="account.html">Account</a>
-        </div>
-    </nav>
-	<h1>[REPLACE WITH IMAGE LOGO] Punk&egrave;Mart</h1>
-	<div class = "cartButton"><a href="cart.html">[CART]</a></div>
+            <div class="nav-mobile">
+                <a href="../index.html">Home</a>
+                <a href="shop.html">Shop</a>
+			    <a href="account.html">Account</a>
+            </div>
+        </nav>
+	    <h1>[REPLACE WITH IMAGE LOGO] Punk&egrave;Mart</h1>
 
-</header>
+    </header>
+    <main>
+        <h1>Your Shopping Cart</h1>
 
+        <p id="empty-cart">
+            add items to your cart
+        </p>
 
-<main>
+        <div id="cart-items"></div>
+        
+        <br>
 
-	<div class="saleTextContainer">
-	<p> <b>SALE:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-	</div>
-	<div class ="textContainer">
-	<p>Check back later!</p>
-	</div>
-</main>
-
-<footer>
-  Copyright &copy; 2026<br>
-    This page was last updated on:
-	<script>
-	document.write(document.lastModified);
-	</script>
-</footer>
-
-</div>
+        <a href="shop.html">Continue Shopping</a>
+    </main>
+    <footer>
+        Copyright &copy; 2026<br>
+        This page was last updated on:
+        <script>
+        document.write(document.lastModified);
+        </script>
+    </footer>
+    </div>
+    <script src="../assets/scripts/cart.js"></script>
 </body>
-
 </html>
