@@ -25,7 +25,7 @@ function saveCart(cart) {
 }
 
 // 3. ADD AN ITEM TO THE CART
-function addToCart(itemNumber, itemName, price, quantity = 1, size = "") {
+function addToCart(itemNumber, itemName, price, quantity = 1, size = "", image = "") {
 
     // Get whatever is already in the cart
     const cart = getCart();
@@ -55,7 +55,8 @@ function addToCart(itemNumber, itemName, price, quantity = 1, size = "") {
             name: itemName,
             price: price,
             quantity: quantity,
-            size: size
+            size: size,
+            image
         });
     }
     // Save the updated cart
@@ -152,13 +153,14 @@ function displayCart() {
 
         // Give it our CSS class
         itemElement.className = "cart-item";
+        itemElement.dataset.cartIndex = index;
 
         // Calculate the price for this particular item
         const itemTotal = item.price * item.quantity;
 
         // Create the cart item's HTML
         itemElement.innerHTML = `
-
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
             <div class="cart-item-info">
                 <h3>${item.name}</h3>
                 <p>Item #${item.number}</p>
@@ -171,23 +173,24 @@ function displayCart() {
                 <label>
                     Quantity:
                     <input
+                        class="cart-quantity"
                         type="number"
                         min="1"
                         value="${item.quantity}"
-                        onchange="changeQuantity(${index}, this.value)"
                     >
                 </label>
                 <p>
                     Item Total:
                     $${itemTotal.toFixed(2)}
                 </p>
+                <button
+                    class="remove-cart-item"
+                    type="button"
+                 >
+                    Remove item from cart
+                </button>
             </div>
-            <button
-                type="button"
-                onclick="removeFromCart(${index})"
-            >
-                Remove item from cart
-            </button>
+                
 
         `;
 
@@ -218,4 +221,56 @@ function displayCart() {
 document.addEventListener("DOMContentLoaded", function () {
 
     displayCart();
+
+    const cartContainer =
+        document.getElementById("cart-items");
+
+    if (!cartContainer) {
+        return;
+    }
+
+
+    // REMOVE ITEM
+
+    cartContainer.addEventListener("click", function (event) {
+
+        const removeButton =
+            event.target.closest(".remove-cart-item");
+
+        if (!removeButton) {
+            return;
+        }
+
+        const cartItem =
+            removeButton.closest(".cart-item");
+
+        const index =
+            Number(cartItem.dataset.cartIndex);
+
+        removeFromCart(index);
+
+    });
+
+
+    // CHANGE QUANTITY
+
+    cartContainer.addEventListener("change", function (event) {
+
+        if (!event.target.classList.contains("cart-quantity")) {
+            return;
+        }
+
+        const cartItem =
+            event.target.closest(".cart-item");
+
+        const index =
+            Number(cartItem.dataset.cartIndex);
+
+        changeQuantity(
+            index,
+            event.target.value
+        );
+
+    });
+
 });
