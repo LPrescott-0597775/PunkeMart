@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Checkout | PunkéMart</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/images.css">
+    <link rel="stylesheet" href="../assets/css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../assets/scripts/global.js" defer></script>
+    <script src="../assets/scripts/navigation.js" defer></script>
+    <script src="../assets/scripts/cart.js" defer></script>
+    <script src="../assets/scripts/checkout.js" defer></script>
+
+</head>
+
+
+<body>
+
+<div id="wrapper">
+
+
+<header>
+
+    <nav>
+
+        <button class="menuButton"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+
+            <i class="fas fa-bars"></i>
+
+        </button>
+
+
+        <div class="nav-mobile">
+
+            <a href="../index.html">Home</a>
+
+            <a href="shop.html">Shop</a>
+
+            <a href="account.html">Account</a>
+
+        </div>
+
+    </nav>
+
+
+    <a href="../index.html"
+       class="logo">
+
+        <img src="../assets/images/punkemart.svg"
+             alt="PunkéMart">
+
+    </a>
+
+
+    <div class="cartButton">
+
+        <a href="cart.html"
+           aria-label="Shopping Cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <h1>Checkout</h1>
+
+
+    <form id="checkout-form">
+
+
+        <!-- SHIPPING INFORMATION -->
+
+        <section class="checkout-section">
+
+            <h2>Shipping Information</h2>
+
+            <div class="checkout-form-grid">
+
+                <div class="form-field">
+
+                    <label for="shipping-first-name">
+                        First Name
+                    </label>
+
+                    <input type="text"
+                           id="shipping-first-name"
+                           name="shipping-first-name">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="shipping-last-name">
+                        Last Name
+                    </label>
+
+                    <input type="text"
+                           id="shipping-last-name"
+                           name="shipping-last-name">
+
+                </div>
+
+
+                <div class="form-field full-width">
+
+                    <label for="shipping-address">
+                        Street Address
+                    </label>
+
+                    <input type="text"
+                           id="shipping-address"
+                           name="shipping-address">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="shipping-city">
+                        City
+                    </label>
+
+                    <input type="text"
+                           id="shipping-city"
+                           name="shipping-city">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="shipping-state">
+                        State
+                    </label>
+
+                    <select id="shipping-state"
+        name="shipping-state">
+
+    <option value="" selected disabled>Select State</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="ME">Maine</option>
+    <option value="MD">Maryland</option>
+    <option value="MA">Massachusetts</option>
+    <option value="MI">Michigan</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NV">Nevada</option>
+    <option value="NH">New Hampshire</option>
+    <option value="NJ">New Jersey</option>
+    <option value="NM">New Mexico</option>
+    <option value="NY">New York</option>
+    <option value="NC">North Carolina</option>
+    <option value="ND">North Dakota</option>
+    <option value="OH">Ohio</option>
+    <option value="OK">Oklahoma</option>
+    <option value="OR">Oregon</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="RI">Rhode Island</option>
+    <option value="SC">South Carolina</option>
+    <option value="SD">South Dakota</option>
+    <option value="TN">Tennessee</option>
+    <option value="TX">Texas</option>
+    <option value="UT">Utah</option>
+    <option value="VT">Vermont</option>
+    <option value="VA">Virginia</option>
+    <option value="WA">Washington</option>
+    <option value="WV">West Virginia</option>
+    <option value="WI">Wisconsin</option>
+    <option value="WY">Wyoming</option>
+
+</select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="shipping-zip">
+                        ZIP Code
+                    </label>
+
+                    <input type="text"
+                        id="shipping-zip"
+                        name="shipping-zip"
+                        inputmode="numeric"
+                        maxlength="5">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="shipping-phone">
+                        Phone Number
+                    </label>
+
+                    <input type="tel"
+                           id="shipping-phone"
+                           name="shipping-phone">
+
+                </div>
+
+
+                <div class="form-field full-width">
+
+                    <label for="shipping-email">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           id="shipping-email"
+                           name="shipping-email">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BILLING INFORMATION -->
+
+        <section class="checkout-section">
+
+            <div class="checkout-heading">
+
+                <h2>Billing Information</h2>
+
+                <button type="button"
+                        id="same-as-shipping"
+                        class="secondary-button">
+                    Same as Shipping
+                </button>
+
+            </div>
+
+
+            <div class="checkout-form-grid">
+
+                <div class="form-field">
+
+                    <label for="billing-first-name">
+                        First Name
+                    </label>
+
+                    <input type="text"
+                           id="billing-first-name"
+                           name="billing-first-name">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="billing-last-name">
+                        Last Name
+                    </label>
+
+                    <input type="text"
+                           id="billing-last-name"
+                           name="billing-last-name">
+
+                </div>
+
+
+                <div class="form-field full-width">
+
+                    <label for="billing-address">
+                        Street Address
+                    </label>
+
+                    <input type="text"
+                           id="billing-address"
+                           name="billing-address">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="billing-city">
+                        City
+                    </label>
+
+                    <input type="text"
+                           id="billing-city"
+                           name="billing-city">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="billing-state">
+                        State
+                    </label>
+
+                    <select id="billing-state"
+                           name="billing-state">
+                        <option value="" selected disabled>Select State</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="billing-zip">
+                        ZIP Code
+                    </label>
+
+                    <input type="text"
+                           id="billing-zip"
+                           name="billing-zip"
+                           inputmode="numeric"
+                           maxlength="5">
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="billing-phone">
+                        Phone Number
+                    </label>
+
+                    <input type="tel"
+                           id="billing-phone"
+                           name="billing-phone">
+
+                </div>
+
+
+                <div class="form-field full-width">
+
+                    <label for="billing-email">
+                        Email
+                    </label>
+
+                    <input type="email"
+                           id="billing-email"
+                           name="billing-email">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PAYMENT METHOD -->
+
+        <section class="checkout-section">
+
+            <h2>Payment Method</h2>
+
+            <div class="payment-options">
+
+
+                <label class="payment-option">
+
+                    <input type="radio"
+                           name="payment-method"
+                           value="Credit Card">
+
+                    <span class="payment-icon">
+                        <i class="fa-regular fa-credit-card"></i>
+                    </span>
+
+                    <span>Credit Card</span>
+
+                </label>
+
+
+                <label class="payment-option">
+
+                    <input type="radio"
+                           name="payment-method"
+                           value="PayPal">
+
+                    <span class="payment-icon">
+                        <i class="fa-brands fa-paypal"></i>
+                    </span>
+
+                    <span>PayPal</span>
+
+                </label>
+
+
+                <label class="payment-option">
+
+                    <input type="radio"
+                           name="payment-method"
+                           value="Apple Pay">
+
+                    <span class="payment-icon">
+                        <i class="fa-brands fa-apple-pay"></i>
+                    </span>
+
+                    <span>Apple Pay</span>
+
+                </label>
+
+
+            </div>
+            <div class="checkout-total">
+                <span>Order Total</span>
+                <span id="checkout-total">$0.00</span>
+            </div>
+
+        </section>
+
+
+        <button type="submit"
+                class="action-button place-order-button">
+            Place Order
+        </button>
+
+
+    </form>
+
+
+</main>
+
+
+<footer>
+
+    Copyright &copy; 2026<br>
+
+    This page was last updated on:
+
+    <span class="lastModified"></span>
+
+</footer>
+
+
+</div>
+
+
+
+<!-- ORDER CONFIRMATION POPUP -->
+
+<div id="order-confirmation"
+     class="order-modal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="confirmation-title"
+     hidden>
+
+    <div class="order-modal-content">
+
+        <button type="button"
+                id="close-confirmation"
+                class="modal-close"
+                aria-label="Close order confirmation">
+            &times;
+        </button>
+
+
+        <i class="fa-solid fa-circle-check confirmation-icon"></i>
+
+
+        <h2 id="confirmation-title">
+            Purchase Complete
+        </h2>
+
+
+        <p>
+            Thank you for your order!
+        </p>
+
+
+        <p>
+            Your order confirmation number is:
+        </p>
+
+
+        <p id="confirmation-number"
+           class="confirmation-number">
+        </p>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
