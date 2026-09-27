@@ -4,10 +4,11 @@
 	<title>PunkeMart </title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="scripts/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="../assets/css/styles.css" />
 	<link rel="stylesheet" href="../assets/css/images.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<script src="../assets/scripts/global.js" defer></script>
+	<script src="../assets/scripts/navigation.js" defer></script>
 </head>
 
 <body>
@@ -15,20 +16,35 @@
 <header>
 
     <nav>
-        <input title="check" type="checkbox" id="check">
+        <button class="menuButton"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
 
-        <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
-        </label>
+
+        </button>
 
         <div class="nav-mobile">
             <a href="../index.html">Home</a>
             <a href="shop.html">Shop</a>
-			<a href="account.html">Account</a>
+            <a href="account.html">Account</a>
         </div>
     </nav>
-	<h1>[REPLACE WITH IMAGE LOGO] Punk&egrave;Mart</h1>
-	<div class = "cartButton"><a href="cart.html">[CART]</a></div>
+
+    <a href="../index.html" class="logo">
+        <img src="../assets/images/punkemart.svg"
+             alt="PunkéMart">
+    </a>
+
+    <div class="cartButton">
+        <a href="cart.html"
+           aria-label="Shopping Cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+        </a>
+    </div>
 
 </header>
 
@@ -41,11 +57,9 @@
 </main>
 
 <footer>
-  Copyright &copy; 2026<br>
+    Copyright &copy; 2026<br>
     This page was last updated on:
-	<script>
-	document.write(document.lastModified);
-	</script>
+    <span class="lastModified"></span>
 </footer>
 
 </div>
