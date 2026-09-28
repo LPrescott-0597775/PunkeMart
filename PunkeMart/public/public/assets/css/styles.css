@@ -1,0 +1,444 @@
+/* ==========================================
+   PUNKÉMART - GLOBAL STYLES
+   ========================================== */
+
+
+/* ---------- COLOR VARIABLES ---------- */
+
+:root {
+    --blue-dark: #1b3158;
+    --blue: #268ab7;
+    --blue-light: #55c5df;
+    --cyan: #19d6e5;
+    --ice-blue: #bdeef2;
+
+    --off-white: #f4f3ec;
+    --white: #ffffff;
+
+    --charcoal: #24282b;
+    --gray: #69757c;
+    --light-gray: #e5eaec;
+}
+
+
+/* ---------- GLOBAL ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    background-color: var(--charcoal);
+    color: var(--charcoal);
+
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+#wrapper {
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: var(--charcoal);
+}
+
+
+/* ---------- HEADER ---------- */
+
+header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    min-height: 100px;
+    padding: 0 3rem;
+
+    background-color: var(--blue-dark);
+
+    border-bottom: 3px solid var(--cyan);
+}
+
+
+/* ---------- LOGO ---------- */
+
+.logo {
+    grid-column: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+}
+
+.logo img {
+    display: block;
+
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+nav {
+    grid-column: 1;
+    grid-row: 1;
+
+    justify-self: start;
+
+    position: relative;
+}
+
+
+/* Hamburger button */
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    color: var(--white);
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+
+    transition: color .2s ease;
+}
+
+.menuButton:hover {
+    color: var(--blue);
+}
+
+.menuButton:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+
+/* Dropdown menu */
+
+.nav-mobile {
+    display: none;
+
+    position: absolute;
+    top: 60px;
+    left: 0;
+
+    width: 220px;
+
+    padding: .5rem 0;
+
+    background-color: var(--blue-dark);
+
+    border: 1px solid var(--light-gray);
+    border-top: 3px solid var(--cyan);
+
+    box-shadow: 0 10px 25px rgba(15, 83, 129, .12);
+
+    z-index: 100;
+}
+
+
+/* JavaScript adds this class */
+
+.nav-mobile.open {
+    display: block;
+}
+
+
+.nav-mobile a {
+    display: block;
+
+    padding: .9rem 1.5rem;
+
+    color: var(--white);
+
+    font-size: .8rem;
+    font-weight: bold;
+
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    transition:
+        color .2s ease,
+        background-color .2s ease;
+}
+
+.nav-mobile a:hover {
+    color: var(--blue-dark);
+    background-color: var(--off-white);
+}
+
+
+/* ---------- SHOPPING BAG ---------- */
+
+.cartButton {
+    grid-column: 3;
+    grid-row: 1;
+
+    justify-self: end;
+}
+
+.cartButton a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    color: var(--white);
+
+    font-size: 1.4rem;
+    text-decoration: none;
+
+    transition: color .2s ease;
+}
+
+.cartButton a:hover {
+    color: var(--blue);
+}
+
+.cartButton a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+.checkoutdisclaimer {
+	text-decoration: underline;
+	font-size: .5em;
+}
+
+
+/* ---------- MAIN CONTENT ---------- */
+
+main {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 3rem 0;
+}
+
+
+/* ---------- HEADINGS ---------- */
+
+h1,
+h2,
+h3 {
+    color: var(--cyan);
+}
+
+main h1 {
+    margin-top: 0;
+
+    font-size: 2rem;
+    letter-spacing: .03em;
+}
+
+main h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+
+    padding-bottom: .75rem;
+
+    color: var(--cyan);
+
+    font-size: 1.4rem;
+
+    letter-spacing: .12em;
+    text-transform: uppercase;
+
+    border-bottom: 1px solid var(--light-gray);
+}
+
+
+/* ---------- HOME TEXT ---------- */
+
+.textContainer {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 2rem auto;
+    padding: 2rem;
+
+    background-color: var(--white);
+
+    border-left: 4px solid var(--blue);
+}
+
+.textContainer p {
+    margin: 0;
+	font-weight: bold;
+}
+.shopnow {
+	width: 100%;
+    max-width: 300px;
+	margin: 2rem auto;
+    padding: 1rem;
+	background-color:  var(--blue);
+	text-align: center;
+}
+.shopnow a{
+	font-size: 1.95rem;
+	font-weight: bold;
+	color: var(--white);
+	text-decoration: none;
+}
+.shopnow a:hover{
+	color: var(--blue-dark);
+}
+
+/* ---------- LINKS ---------- */
+
+main a {
+    color: var(--blue-dark);
+
+    text-decoration-color: var(--cyan);
+    text-underline-offset: 3px;
+
+    transition: color .2s ease;
+}
+
+main a:hover {
+    color: var(--blue);
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+button,
+.action-button {
+    padding: .8rem 1.2rem;
+
+    background-color: var(--blue-dark);
+    color: var(--white);
+
+    border: none;
+
+    font-weight: bold;
+
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background-color .2s ease,
+        color .2s ease;
+}
+
+button:hover,
+.action-button:hover {
+    background-color: var(--blue);
+}
+
+
+/* Prevent global button styling from affecting hamburger */
+
+.menuButton {
+    background: transparent;
+    color: var(--white);
+    padding: 0;
+}
+
+.menuButton:hover {
+    background: transparent;
+    color: var(--blue);
+}
+
+
+/* ---------- FORM ELEMENTS ---------- */
+
+input,
+select {
+    padding: .65rem;
+
+    background-color: var(--white);
+    color: var(--charcoal);
+
+    border: 1px solid #cbd3d7;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--cyan);
+    outline-offset: 1px;
+}
+
+
+/* ---------- HORIZONTAL RULE ---------- */
+
+hr {
+    height: 1px;
+
+    padding: 0;
+
+    background-color: var(--light-gray);
+
+    border: none;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+footer {
+    margin-top: 4rem;
+    padding: 2rem;
+
+    background-color: var(--blue-dark);
+    color: var(--white);
+
+    text-align: center;
+
+    font-size: .8rem;
+    letter-spacing: .04em;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+
+    header {
+        min-height: 80px;
+        padding: 0 1rem;
+    }
+
+    .logo img {
+        width: 170px;
+    }
+
+    .nav-mobile {
+        top: 50px;
+    }
+
+    main {
+        width: 92%;
+
+        padding: 2rem 0;
+    }
+
+    .textContainer {
+        padding: 1.25rem;
+    }
+
+}
