@@ -102,7 +102,45 @@ function changeQuantity(index, newQuantity) {
     // Redraw the cart
     displayCart();
 }
-// 6. CALCULATE THE TOTAL
+// 6. CHANGE THE SIZE OF AN ITEM
+function changeSize(index, newSize) {
+
+    const cart = getCart();
+
+    // Make sure the item exists
+    if (!cart[index]) {
+        return;
+    }
+
+    const currentItem = cart[index];
+    // Look for another copy of the same item that already has the new size
+    const existingItem = cart.find((item, itemIndex) =>
+        itemIndex !== index &&
+        item.number === currentItem.number &&
+        item.size === newSize
+    );
+
+    // If that item already exists,combine the quantities
+    if (existingItem) {
+
+        existingItem.quantity += currentItem.quantity;
+        // Remove the old item
+        cart.splice(index, 1);
+    }
+
+    // Otherwise, simply change the size
+    else {
+        currentItem.size = newSize;
+    }
+
+    // Save the updated cart
+    saveCart(cart);
+
+    // Redraw the cart
+    displayCart();
+}
+
+// 7. CALCULATE THE TOTAL
 function calculateTotal(cart) {
 
     let total = 0;
@@ -112,7 +150,7 @@ function calculateTotal(cart) {
     });
     return total;
 }
-// 7. DISPLAY THE CART
+// 8. DISPLAY THE CART
 function displayCart() {
 
     // Find the area where cart items will be displayed
@@ -138,6 +176,18 @@ function displayCart() {
         if (emptyMessage) {
             emptyMessage.style.display = "block";
         }
+
+        let totalElement = document.getElementById("cart-total");
+
+        if(!totalElement) {
+            totalElement = document.createElement("div");
+            totalElement.id = "cart-total";
+            cartContainer.parentNode.appendChild(totalElement);
+        }
+
+        totalElement.innerHTML = 
+        `<h2>Cart Total: $0.00</h2>`;
+
         return;
     }
     // CART HAS ITEMS
@@ -167,8 +217,26 @@ function displayCart() {
                 <p>Price: $${item.price.toFixed(2)}</p>
                 ${
                     item.size
-                    ? `<p>Size: ${item.size}</p>`
-                    : ""
+                ? `
+                    <label>
+                        Size:
+                        <select class="cart-size">
+                            <option value="Small" ${item.size === "Small" ? "selected" : ""}>
+                                Small
+                            </option>
+                            <option value="Medium" ${item.size === "Medium" ? "selected" : ""}>
+                                Medium
+                            </option>
+                            <option value="Large" ${item.size === "Large" ? "selected" : ""}>
+                                Large
+                            </option>
+                            <option value="XLarge" ${item.size === "XLarge" ? "selected" : ""}>
+                                XLarge
+                            </option>
+                        </select>
+                    </label>
+                `
+                : ""
                 }
                 <label>
                     Quantity:
@@ -217,7 +285,7 @@ function displayCart() {
     `;
 }
 
-// 8. RUN displayCart WHEN THE PAGE LOADS
+// 9. RUN displayCart WHEN THE PAGE LOADS
 document.addEventListener("DOMContentLoaded", function () {
 
     displayCart();
@@ -229,9 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-
     // REMOVE ITEM
-
     cartContainer.addEventListener("click", function (event) {
 
         const removeButton =
@@ -251,9 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
     // CHANGE QUANTITY
-
     cartContainer.addEventListener("change", function (event) {
 
         if (!event.target.classList.contains("cart-quantity")) {
@@ -273,4 +337,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    cartContainer.addEventListener("change", function (event) {
+
+        if (!event.target.classList.contains("cart-size")) {
+            return;
+        }
+
+        const cartItem =
+            event.target.closest(".cart-item");
+
+        const index =
+            Number(cartItem.dataset.cartIndex);
+
+        changeSize(
+            index,
+            event.target.value
+        );
+
+    });
+
+    // CHECKING CHECKOUT VALIDATION
+    const checkoutButton = document.getElementById("checkout-button");
+    if (checkoutButton) {
+    checkoutButton.addEventListener("click", function () {
+        const cart = getCart();
+
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add an item before checking out.");
+            return;
+        }
+
+        window.location.href = "checkout.html";
+    });
+}
 });
