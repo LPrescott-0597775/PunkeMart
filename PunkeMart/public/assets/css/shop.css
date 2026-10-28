@@ -30,6 +30,10 @@
         box-shadow .2s ease,
         border-color .2s ease;
 }
+.product-card.low-stock {
+    border: 2px solid #e74c3c;
+    background-color: #fdf2f2;
+}
 
 .product-card:hover {
     transform: translateY(-4px);
@@ -120,7 +124,66 @@
 
     color: var(--gray);
 }
+/* ---------- REORDER TABLE FORMATTING ---------- */
 
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    margin-top: 1.5rem;
+    color: var(--charcoal);
+}
+
+.order-table th {
+    padding: 1rem 1.25rem;
+    background-color: #f7f8f8;
+    color: var(--blue-dark);
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: left;
+    border-bottom: 2px solid var(--light-gray);
+}
+
+.order-table td {
+    padding: 1rem 1.25rem;
+    color: var(--charcoal);
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+/* Zebra striping for table rows using theme variables */
+.order-table tbody tr:nth-child(even) {
+    background-color: #f7f8f8;
+}
+
+.order-table tbody tr:nth-child(odd) {
+    background-color: var(--white);
+}
+
+.order-table tbody tr:hover {
+    background-color: var(--ice-blue);
+}
+/* ---------- REORDER TABLE INPUTS ---------- */
+
+.order-table input.reorder-input {
+    width: 90px;
+    padding: 0.4rem 0.6rem;
+    font-size: 1rem;
+    color: var(--charcoal);
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    text-align: center;
+}
+
+.order-table input.reorder-input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px var(--ice-blue);
+}
 
 /* ---------- MOBILE ---------- */
 
@@ -232,8 +295,27 @@
     margin: 0;
     color: var(--charcoal);
 }
+#no-reorders-msg {
+    display: none; /* Hidden by default */
+    width: 100%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-left: 4px solid var(--blue);
+    color: var(--charcoal);
+    font-weight: bold;
+}
 
+/* Automatically show and style the message box when the table container is hidden by JS */
+.table-responsive[style*="none"] ~ #no-reorders-msg {
+    display: block !important;
+}
 
+/* Ensure it stays hidden when the table container is visible */
+.table-responsive[style*="block"] ~ #no-reorders-msg {
+    display: none !important;
+}
 
 /* ---------- CHECKOUT ---------- */
 

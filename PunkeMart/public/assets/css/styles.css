@@ -97,7 +97,16 @@ nav {
 
     position: relative;
 }
+.redirect-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
+.redirect-buttons .action-button {
+    flex: 1;
+    text-align: center;
+}
 
 /* Hamburger button */
 
@@ -413,6 +422,78 @@ footer {
     letter-spacing: .04em;
 }
 
+/* ---------- ACTION BUTTON OVERRIDES ---------- */
+
+/* Ensure anchor-tag buttons inherit white text and remove link underline */
+a.action-button {
+    text-decoration: none;
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Secondary Button styling matching site theme */
+.secondary-button {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.secondary-button:hover {
+    background-color: var(--blue-light);
+    color: var(--blue-dark);
+}
+/* Custom reorder section layout */
+.add-custom-reorder-section {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+}
+
+.custom-reorder-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#additional-product-select {
+    padding: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+#additional-qty-input {
+    width: 100px;
+}
+
+/* Action buttons layout */
+.action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Button & Link alignment fixes */
+a.action-button {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+}
+
+.secondary-button {
+    background-color: var(--blue);
+    color: var(--charcoal);
+}
+
+.secondary-button:hover {
+    background-color: var(--blue-light);
+    color: var(--charcoal);
+}
 
 /* ---------- MOBILE ---------- */
 
