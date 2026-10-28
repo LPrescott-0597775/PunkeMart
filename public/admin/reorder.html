@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PunkeMart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/images.css" />
+    <link rel="stylesheet" href="../assets/css/shop.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="../assets/scripts/global.js" defer></script>
+    <script src="../assets/scripts/navigation.js" defer></script>
+    <script src="../assets/scripts/reorder.js" defer></script>
+</head>
+
+<body>
+<div id="wrapper">
+<header>
+    <nav>
+        <button class="menuButton"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="nav-mobile">
+            <a href="orders.html">View Orders</a>
+            <a href="inventory.html">View Inventory</a>
+			<a href="reorder.html">Re-Order Inventory</a>
+            <a href="../index.html">Return to Public Site</a>
+        </div>
+    </nav>
+
+    <a href="admin_home.html" class="logo">
+        <img src="../assets/images/punkemart.svg" alt="PunkéMart">
+    </a>
+</header>
+
+<main>
+    <h2>Reorder Inventory</h2>
+	<div class="add-custom-reorder-section">
+    <p>Review items below the minimum stock threshold and adjust quantities as needed.</p>
+	</div>
+    
+    <div class="table-responsive">
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity (minimum order: 5)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="reorder-table-body">
+                <!-- Dynamically populated via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Empty state message using your existing textContainer class -->
+    <div class="textContainer" id="no-reorders-msg">
+        <p>No items currently require reordering. Use the section below to add items manually.</p>
+    </div>
+
+    <!-- Restored original container class -->
+<div class="add-custom-reorder-section">
+        <h3>Add Item to Reorder</h3>
+        <div class="custom-reorder-row">
+            <!-- Removed class="form-field" from the select tag below -->
+            <select id="additional-product-select">
+                <option value="">-- Select a product to restock --</option>
+            </select>
+            <input type="number" id="additional-qty-input" class="reorder-input" value="10" min="1" max="500" placeholder="Qty">
+            <button id="add-to-reorder-btn" class="action-button secondary-button" type="button">Add to List</button>
+        </div>
+    </div>
+
+    <!-- Restored original action-buttons container class -->
+    <div class="action-buttons">
+        <button id="confirm-reorder-btn" class="action-button primary-button" type="button">
+            Confirm and Submit Order
+        </button>
+        <a href="inventory.html" class="action-button secondary-button">
+            Back to Inventory
+        </a>
+    </div>
+</main>
+
+<footer>
+    Copyright &copy; 2026<br>
+    This page was last updated on:
+    <span class="lastModified"></span>
+</footer>
+
+</div>
+</body>
+</html>
