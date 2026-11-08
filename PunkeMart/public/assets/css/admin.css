@@ -1,0 +1,188 @@
+/* ==============================
+   ADMIN HOME AND LOGIN
+   ============================== */
+
+.redirect-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+
+/* ==============================
+   ADMIN INVENTORY
+   ============================== */
+
+#gear-list,
+#apparel-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+#gear-list .product-card,
+#apparel-list .product-card {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+#gear-list .shopImg,
+#apparel-list .shopImg {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+#gear-list .product-name,
+#apparel-list .product-name {
+    font-weight: bold;
+}
+
+#gear-list .product-price,
+#apparel-list .product-price {
+    margin-top: 0.5rem;
+}
+
+/* Highlight products that are running low on stock */
+.product-card.low-stock {
+    border: 2px solid #e74c3c;
+    background-color: #fdf2f2;
+}
+
+/* ==============================
+   ADMIN REORDER PAGE
+   ============================== */
+
+/* Reorder instructions and add-item section */
+.add-custom-reorder-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+}
+
+/* Product selection and quantity input */
+.custom-reorder-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#additional-product-select,
+#additional-qty-input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font: inherit;
+}
+
+#additional-product-select {
+    flex: 1;
+    min-width: 200px;
+}
+
+#additional-qty-input {
+    width: 100px;
+}
+
+
+/* Reorder table */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.order-table th,
+.order-table td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #24243a;
+    color: #ffffff;
+}
+
+.order-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.order-table tbody tr:hover {
+    background-color: #e6e6f0;
+}
+
+/* Quantity fields within the reorder table */
+.reorder-input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font: inherit;
+}
+
+.order-table input.reorder-input:focus,
+#additional-product-select:focus,
+#additional-qty-input:focus {
+    outline: 2px solid #5555aa;
+    outline-offset: 2px;
+}
+
+
+
+/* Reorder page action buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+
+/* ==============================
+   MOBILE ADMIN LAYOUT
+   ============================== */
+
+@media (max-width: 600px) {
+
+    .custom-reorder-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #additional-product-select,
+    #additional-qty-input {
+        width: 100%;
+    }
+
+    .order-table th,
+    .order-table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .redirect-buttons,
+    .action-buttons {
+        flex-direction: column;
+    }
+
+}
