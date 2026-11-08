@@ -1,4 +1,6 @@
+
 // 1. GET THE CURRENT CART
+
 function getCart() {
 
     const savedCart = localStorage.getItem("cart");
@@ -9,7 +11,7 @@ function getCart() {
     }
 
     // Turn the saved text back into JavaScript data
-     try {
+    try {
         return JSON.parse(savedCart);
     } catch (error) {
         console.error("Could not read shopping cart:", error);
@@ -17,15 +19,20 @@ function getCart() {
     }
 }
 
+
 // 2. SAVE THE CART
+
 function saveCart(cart) {
 
     // Convert the cart into text and save it in the browser
     localStorage.setItem("cart", JSON.stringify(cart));
+
 }
 
+
 // 3. ADD AN ITEM TO THE CART
-function addToCart(itemNumber, itemName, price, quantity = 1, size = "", image = "") {
+
+function addToCart(itemNumber, itemName, price, quantity = 1, image = "") {
 
     // Get whatever is already in the cart
     const cart = getCart();
@@ -37,35 +44,44 @@ function addToCart(itemNumber, itemName, price, quantity = 1, size = "", image =
     price = Number(price);
 
     // Look for an item that is already in the cart
-    // with the same item number AND the same size
+    // with the same item number
     const existingItem = cart.find(item =>
-        item.number === itemNumber &&
-        item.size === size
+        item.number === itemNumber
     );
+
     // If the item is already in the cart
     if (existingItem) {
+
         // Increase its quantity instead of creating
         // another separate cart entry
         existingItem.quantity += quantity;
+
     }
+
     // If this is a new item
     else {
+
         cart.push({
             number: itemNumber,
             name: itemName,
             price: price,
             quantity: quantity,
-            size: size,
-            image
+            image: image
         });
+
     }
+
     // Save the updated cart
     saveCart(cart);
+
     // Take the customer to the cart page
     window.location.href = "cart.html";
+
 }
 
+
 // 4. REMOVE AN ITEM FROM THE CART
+
 function removeFromCart(index) {
 
     // Get the current cart
@@ -79,8 +95,12 @@ function removeFromCart(index) {
 
     // Redraw the cart
     displayCart();
+
 }
+
+
 // 5. CHANGE THE QUANTITY OF AN ITEM
+
 function changeQuantity(index, newQuantity) {
 
     const cart = getCart();
@@ -93,6 +113,7 @@ function changeQuantity(index, newQuantity) {
     if (newQuantity < 1 || isNaN(newQuantity)) {
         newQuantity = 1;
     }
+
     // Change the quantity
     cart[index].quantity = newQuantity;
 
@@ -101,56 +122,28 @@ function changeQuantity(index, newQuantity) {
 
     // Redraw the cart
     displayCart();
-}
-// 6. CHANGE THE SIZE OF AN ITEM
-function changeSize(index, newSize) {
 
-    const cart = getCart();
-
-    // Make sure the item exists
-    if (!cart[index]) {
-        return;
-    }
-
-    const currentItem = cart[index];
-    // Look for another copy of the same item that already has the new size
-    const existingItem = cart.find((item, itemIndex) =>
-        itemIndex !== index &&
-        item.number === currentItem.number &&
-        item.size === newSize
-    );
-
-    // If that item already exists,combine the quantities
-    if (existingItem) {
-
-        existingItem.quantity += currentItem.quantity;
-        // Remove the old item
-        cart.splice(index, 1);
-    }
-
-    // Otherwise, simply change the size
-    else {
-        currentItem.size = newSize;
-    }
-
-    // Save the updated cart
-    saveCart(cart);
-
-    // Redraw the cart
-    displayCart();
 }
 
-// 7. CALCULATE THE TOTAL
+
+// 6. CALCULATE THE TOTAL
+
 function calculateTotal(cart) {
 
     let total = 0;
+
     // Go through every item in the cart
     cart.forEach(item => {
         total += item.price * item.quantity;
     });
+
     return total;
+
 }
-// 8. DISPLAY THE CART
+
+
+// 7. DISPLAY THE CART
+
 function displayCart() {
 
     // Find the area where cart items will be displayed
@@ -165,8 +158,10 @@ function displayCart() {
     if (!cartContainer) {
         return;
     }
+
     // Get the current cart
     const cart = getCart();
+
     // Clear the current cart display
     cartContainer.innerHTML = "";
 
@@ -179,17 +174,19 @@ function displayCart() {
 
         let totalElement = document.getElementById("cart-total");
 
-        if(!totalElement) {
+        if (!totalElement) {
             totalElement = document.createElement("div");
             totalElement.id = "cart-total";
             cartContainer.parentNode.appendChild(totalElement);
         }
 
-        totalElement.innerHTML = 
-        `<h2>Cart Total: $0.00</h2>`;
+        totalElement.innerHTML = `
+            <h2>Cart Total: $0.00</h2>
+        `;
 
         return;
     }
+
     // CART HAS ITEMS
     if (emptyMessage) {
         emptyMessage.style.display = "none";
@@ -203,6 +200,7 @@ function displayCart() {
 
         // Give it our CSS class
         itemElement.className = "cart-item";
+
         itemElement.dataset.cartIndex = index;
 
         // Calculate the price for this particular item
@@ -211,33 +209,15 @@ function displayCart() {
         // Create the cart item's HTML
         itemElement.innerHTML = `
             <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+
             <div class="cart-item-info">
+
                 <h3>${item.name}</h3>
+
                 <p>Item #${item.number}</p>
+
                 <p>Price: $${item.price.toFixed(2)}</p>
-                ${
-                    item.size
-                ? `
-                    <label>
-                        Size:
-                        <select class="cart-size">
-                            <option value="Small" ${item.size === "Small" ? "selected" : ""}>
-                                Small
-                            </option>
-                            <option value="Medium" ${item.size === "Medium" ? "selected" : ""}>
-                                Medium
-                            </option>
-                            <option value="Large" ${item.size === "Large" ? "selected" : ""}>
-                                Large
-                            </option>
-                            <option value="XLarge" ${item.size === "XLarge" ? "selected" : ""}>
-                                XLarge
-                            </option>
-                        </select>
-                    </label>
-                `
-                : ""
-                }
+
                 <label>
                     Quantity:
                     <input
@@ -247,23 +227,25 @@ function displayCart() {
                         value="${item.quantity}"
                     >
                 </label>
+
                 <p>
                     Item Total:
                     $${itemTotal.toFixed(2)}
                 </p>
+
                 <button
                     class="remove-cart-item"
                     type="button"
-                 >
+                >
                     Remove item from cart
                 </button>
-            </div>
-                
 
+            </div>
         `;
 
         // Add this item to the cart page
         cartContainer.appendChild(itemElement);
+
     });
 
     // CART TOTAL
@@ -274,18 +256,21 @@ function displayCart() {
 
     // If one doesn't exist, create it
     if (!totalElement) {
-
         totalElement = document.createElement("div");
         totalElement.id = "cart-total";
         cartContainer.parentNode.appendChild(totalElement);
     }
+
     // Display the total
     totalElement.innerHTML = `
         <h2>Cart Total: $${total.toFixed(2)}</h2>
     `;
+
 }
 
-// 9. RUN displayCart WHEN THE PAGE LOADS
+
+// 8. RUN displayCart WHEN THE PAGE LOADS
+
 document.addEventListener("DOMContentLoaded", function () {
 
     displayCart();
@@ -317,6 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+
     // CHANGE QUANTITY
     cartContainer.addEventListener("change", function (event) {
 
@@ -337,37 +323,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    cartContainer.addEventListener("change", function (event) {
-
-        if (!event.target.classList.contains("cart-size")) {
-            return;
-        }
-
-        const cartItem =
-            event.target.closest(".cart-item");
-
-        const index =
-            Number(cartItem.dataset.cartIndex);
-
-        changeSize(
-            index,
-            event.target.value
-        );
-
-    });
 
     // CHECKING CHECKOUT VALIDATION
     const checkoutButton = document.getElementById("checkout-button");
+
     if (checkoutButton) {
-    checkoutButton.addEventListener("click", function () {
-        const cart = getCart();
 
-        if (cart.length === 0) {
-            alert("Your cart is empty. Please add an item before checking out.");
-            return;
-        }
+        checkoutButton.addEventListener("click", function () {
 
-        window.location.href = "checkout.html";
-    });
-}
+            const cart = getCart();
+
+            if (cart.length === 0) {
+
+                alert("Your cart is empty. Please add an item before checking out.");
+
+                return;
+
+            }
+
+            window.location.href = "checkout.html";
+
+        });
+
+    }
+
 });
