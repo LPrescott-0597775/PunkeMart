@@ -52,7 +52,8 @@
 }
 
 /* Highlight products that are running low on stock */
-.product-card.low-stock {
+#gear-list .product-card.low-stock,
+#apparel-list .product-card.low-stock {
     border: 2px solid #e74c3c;
     background-color: #fdf2f2;
 }
