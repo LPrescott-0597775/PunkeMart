@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const shop = document.querySelector("main");
@@ -6,9 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-
     /* ADD TO CART */
-
     shop.addEventListener("click", function (event) {
 
         const addButton = event.target.closest(".add-to-cart");
@@ -17,22 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-
         const productCard = addButton.closest(".product-card");
 
         if (!productCard) {
             return;
         }
 
-
         const productId = productCard.dataset.productId;
         const productName = productCard.dataset.productName;
         const productPrice = Number(productCard.dataset.productPrice);
         const productImage = productCard.querySelector(".shopImg").src;
 
-
         /* Item Quantity */
-
         const quantityInput =
             productCard.querySelector(".product-quantity");
 
@@ -40,25 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
             ? Number(quantityInput.value)
             : 1;
 
-
-        /* Products with selectible quantities */
-
-        const optionSelect =
-            productCard.querySelector(".product-option");
-
-        const option = optionSelect
-            ? optionSelect.value
-            : "";
-
-
-        /* addToCart() remains in cart.js */
-
+        /* ADD ITEM TO CART */
         addToCart(
             productId,
             productName,
             productPrice,
             quantity,
-            option,
             productImage
         );
 
