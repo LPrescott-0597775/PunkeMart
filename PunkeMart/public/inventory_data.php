@@ -1,7 +1,7 @@
 
 <?php
 // CREATE: add a new inventory item.
-function createItem($conn, $name, $description, $price, $stock, $reorderStatus) {
+function insertItem($conn, $name, $description, $price, $stock, $reorderStatus) {
     $stmt = $conn->prepare(
         'INSERT INTO items
         (itemName, description, price, stockOnHand, reorderStatus)
