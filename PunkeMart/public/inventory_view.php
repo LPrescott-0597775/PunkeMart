@@ -93,11 +93,11 @@ if (!$items): ?>
         <td>
             <form method="post" action="<?= esc($_SERVER['PHP_SELF']); ?>" class="inventory-edit-form">
                 <input type="hidden" name="itemID" value="<?= esc($item['itemID']); ?>">
-                <label>Name <input name="itemName" value="<?= esc($item['itemName']); ?>" required></label>
-                <label>Description <input name="description" value="<?= esc($item['description']); ?>" required></label>
+                <label>Name <input name="itemName" value="<?= esc($item['itemName']); ?>" required></label><br>
+                <label>Description <input name="description" value="<?= esc($item['description']); ?>" required></label><br>
                 <label>Price <input name="price" type="number" min="0" step="0.01" value="<?= esc($item['price']); ?>" required></label>
-                <label>Stock <input name="stockOnHand" type="number" min="0" value="<?= esc($item['stockOnHand']); ?>" required></label>
-                <label><input type="checkbox" name="reorderStatus" value="1" <?= $item['reorderStatus'] ? 'checked' : ''; ?>> Reorder</label>
+                <label>Stock <input name="stockOnHand" type="number" min="0" value="<?= esc($item['stockOnHand']); ?>" required></label><br>
+                <label><input type="checkbox" name="reorderStatus" value="1" <?= $item['reorderStatus'] ? 'checked' : ''; ?>> Reorder</label><br>
                 <button class="action-button secondary-button" type="submit" name="update">Update</button>
                 <button class="action-button secondary-button" type="submit" name="delete" onclick="return confirm('Delete this item?')">Delete</button>
             </form>

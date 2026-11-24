@@ -28,7 +28,7 @@ function createOrder($conn, $customerID, $itemID, $quantity, $paymentType, $date
         $orderStmt = $conn->prepare(
             'INSERT INTO orders
              (customerID, orderitemID, orderTotal, paymentType, datePlaced)
-             VALUES (:customerID, 0, :total, :paymentType, :datePlaced)'
+             VALUES (:customerID, NULL, :total, :paymentType, :datePlaced)'
         );
 
         $orderStmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
@@ -165,6 +165,10 @@ function deleteOrder($conn, $id) {
     $conn->beginTransaction();
 
     try {
+        // Remove the header's reference to its first item before deleting details.
+        $unlink = $conn->prepare('UPDATE orders SET orderitemID = NULL WHERE orderID = :id');
+        $unlink->execute(['id' => $id]);
+
         // Delete the detail rows first because they reference the order.
         $detailStmt = $conn->prepare(
             'DELETE FROM orderitems WHERE orderID = :id'

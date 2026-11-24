@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const closeConfirmation =
         document.querySelector("#close-confirmation");
-    
+
     const checkoutTotal =
         document.querySelector("#checkout-total");
 
@@ -22,22 +22,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!checkoutForm) {
         return;
     }
-    
+
+
+    /* ---------- CALCULATE ORDER TOTAL ---------- */
+
     const savedCart = localStorage.getItem("cart");
 
     const cart = savedCart
-    ? JSON.parse(savedCart)
-    : [];
+        ? JSON.parse(savedCart)
+        : [];
 
     let total = 0;
 
     cart.forEach(function (item) {
         total += item.price * item.quantity;
-});
+    });
 
-if (checkoutTotal) {
-    checkoutTotal.textContent = "$" + total.toFixed(2);
-}
+    if (checkoutTotal) {
+        checkoutTotal.textContent = "$" + total.toFixed(2);
+    }
+
 
     /* ---------- SAME AS SHIPPING BUTTON ---------- */
 
@@ -56,7 +60,6 @@ if (checkoutTotal) {
                 "email"
             ];
 
-
             fields.forEach(function (field) {
 
                 const shippingField =
@@ -68,7 +71,6 @@ if (checkoutTotal) {
                     document.querySelector(
                         "#billing-" + field
                     );
-
 
                 if (shippingField && billingField) {
                     billingField.value =
@@ -84,176 +86,229 @@ if (checkoutTotal) {
     /* ---------- PLACE ORDER ---------- */
 
     checkoutForm.addEventListener(
-    "submit",
-    function (event) {
+        "submit",
+        async function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        if (!validateCheckout()) {
-            return;
+            // Validate the checkout information
+            if (!validateCheckout()) {
+                return;
+            }
+
+            // Retrieve the current shopping cart
+            const cart = getCart();
+
+            if (!cart.length) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            // Prevent multiple order submissions
+            const button = checkoutForm.querySelector(
+                'button[type="submit"]'
+            );
+
+            if (button.disabled) {
+                return;
+            }
+
+            button.disabled = true;
+
+            try {
+
+                // Collect shipping, billing, and payment information
+                const data = new FormData(checkoutForm);
+
+                // Add the cart items and quantities
+                data.append(
+                    "cart",
+                    JSON.stringify(
+                        cart.map(item => ({
+                            itemID: Number(item.number),
+                            quantity: Number(item.quantity)
+                        }))
+                    )
+                );
+
+                // Send the order information to PHP
+                const response = await fetch(
+                    "checkout_submit.php",
+                    {
+                        method: "POST",
+                        body: data
+                    }
+                );
+
+                // Read the response from PHP
+                const result = await response.json();
+
+                // Check whether the order was saved
+                if (!response.ok || !result.success) {
+                    throw new Error(
+                        result.message || "Could not save order."
+                    );
+                }
+
+                // Display the actual database order ID
+                confirmationNumber.textContent =
+                    "PM-" + result.orderID;
+
+                // Clear the completed shopping cart
+                clearCompletedCart();
+
+                // Display the confirmation popup
+                confirmationModal.hidden = false;
+
+            } catch (error) {
+
+                alert(
+                    error.message || "Could not save order."
+                );
+
+                // Allow the customer to try again
+                button.disabled = false;
+
+            }
+
         }
-
-        const orderNumber =
-            generateOrderNumber();
-
-        confirmationNumber.textContent =
-            orderNumber;
-
-        confirmationModal.hidden = false;
-
-    }
-);
+    );
 
 
     /* ---------- CHECKOUT VALIDATION ---------- */
 
-function validateCheckout() {
+    function validateCheckout() {
 
-    const requiredFields = [
-        "shipping-first-name",
-        "shipping-last-name",
-        "shipping-address",
-        "shipping-city",
-        "shipping-state",
-        "shipping-zip",
-        "shipping-phone",
-        "shipping-email",
-        "billing-first-name",
-        "billing-last-name",
-        "billing-address",
-        "billing-city",
-        "billing-state",
-        "billing-zip",
-        "billing-phone",
-        "billing-email"
-    ];
+        const requiredFields = [
+            "shipping-first-name",
+            "shipping-last-name",
+            "shipping-address",
+            "shipping-city",
+            "shipping-state",
+            "shipping-zip",
+            "shipping-phone",
+            "shipping-email",
+            "billing-first-name",
+            "billing-last-name",
+            "billing-address",
+            "billing-city",
+            "billing-state",
+            "billing-zip",
+            "billing-phone",
+            "billing-email"
+        ];
 
-    // Every field must have a value
 
-    for (const fieldId of requiredFields) {
+        // Every field must have a value
 
-        const field =
-            document.getElementById(fieldId);
+        for (const fieldId of requiredFields) {
 
-        if (!field || field.value.trim() === "") {
+            const field =
+                document.getElementById(fieldId);
 
-            alert("Please complete all shipping and billing fields.");
+            if (!field || field.value.trim() === "") {
 
-            if (field) {
-                field.focus();
+                alert(
+                    "Please complete all shipping and billing fields."
+                );
+
+                if (field) {
+                    field.focus();
+                }
+
+                return false;
             }
+        }
+
+
+        // ZIP validation
+
+        const zipPattern = /^[0-9]{5}$/;
+
+        const shippingZip =
+            document.getElementById("shipping-zip");
+
+        const billingZip =
+            document.getElementById("billing-zip");
+
+        if (
+            !zipPattern.test(shippingZip.value) ||
+            !zipPattern.test(billingZip.value)
+        ) {
+
+            alert("ZIP code must contain exactly 5 digits.");
 
             return false;
         }
-    }
 
 
-    // ZIP validation
+        // Phone validation: 000-000-0000
 
-    const zipPattern = /^[0-9]{5}$/;
+        const phonePattern =
+            /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
 
-    const shippingZip =
-        document.getElementById("shipping-zip");
+        const shippingPhone =
+            document.getElementById("shipping-phone");
 
-    const billingZip =
-        document.getElementById("billing-zip");
+        const billingPhone =
+            document.getElementById("billing-phone");
 
-    if (
-        !zipPattern.test(shippingZip.value) ||
-        !zipPattern.test(billingZip.value)
-    ) {
+        if (
+            !phonePattern.test(shippingPhone.value) ||
+            !phonePattern.test(billingPhone.value)
+        ) {
 
-        alert("ZIP code must contain exactly 5 digits.");
-
-        return false;
-    }
-
-
-    // Phone validation: 000-000-0000
-
-    const phonePattern =
-        /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-
-    const shippingPhone =
-        document.getElementById("shipping-phone");
-
-    const billingPhone =
-        document.getElementById("billing-phone");
-
-    if (
-        !phonePattern.test(shippingPhone.value) ||
-        !phonePattern.test(billingPhone.value)
-    ) {
-
-        alert(
-            "Phone number must use the format 806-555-1234."
-        );
-
-        return false;
-    }
-
-
-    // Email validation
-
-    const emailPattern =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const shippingEmail =
-        document.getElementById("shipping-email");
-
-    const billingEmail =
-        document.getElementById("billing-email");
-
-    if (
-        !emailPattern.test(shippingEmail.value) ||
-        !emailPattern.test(billingEmail.value)
-    ) {
-
-        alert(
-            "Please enter a valid email address."
-        );
-
-        return false;
-    }
-
-
-    // Payment method validation
-
-    const paymentMethod =
-        document.querySelector(
-            'input[name="payment-method"]:checked'
-        );
-
-    if (!paymentMethod) {
-
-        alert("Please select a payment method.");
-
-        return false;
-    }
-
-
-    return true;
-}
-
-
-    /* ---------- TEMPORARY ORDER NUMBER ---------- *
-     * PHP/database order IDs can replace this later without changing form */
-
-    function generateOrderNumber() {
-
-        const randomNumber =
-            Math.floor(
-                100000 + Math.random() * 900000
+            alert(
+                "Phone number must use the format 806-555-1234."
             );
 
+            return false;
+        }
 
-        return "PM-" + randomNumber;
 
+        // Email validation
+
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const shippingEmail =
+            document.getElementById("shipping-email");
+
+        const billingEmail =
+            document.getElementById("billing-email");
+
+        if (
+            !emailPattern.test(shippingEmail.value) ||
+            !emailPattern.test(billingEmail.value)
+        ) {
+
+            alert(
+                "Please enter a valid email address."
+            );
+
+            return false;
+        }
+
+
+        // Payment method validation
+
+        const paymentMethod =
+            document.querySelector(
+                'input[name="payment-method"]:checked'
+            );
+
+        if (!paymentMethod) {
+
+            alert("Please select a payment method.");
+
+            return false;
+        }
+
+        return true;
     }
 
 
-    /* ---------- CLOSE CONFIRMATION ---------- *
-     * Closing the confirmation: clears the cart and returns to the home page */
+    /* ---------- CLOSE CONFIRMATION ---------- */
 
     closeConfirmation.addEventListener(
         "click",
@@ -261,8 +316,7 @@ function validateCheckout() {
 
             clearCompletedCart();
 
-            window.location.href =
-                "../index.html";
+            window.location.href = "index.html";
 
         }
     );
@@ -272,7 +326,7 @@ function validateCheckout() {
 
     function clearCompletedCart() {
 
-       localStorage.removeItem("cart");
+        localStorage.removeItem("cart");
 
     }
 
